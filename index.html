@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lafayette County Circuit Clerk page</title>
+    <title>Display Rotation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .content {
+            width: 100%;
+            height: 100vh;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Lafayette County Circuit Clerk page</h1>
-    <p>Hello, world!</p>
+    <iframe id="calendar" class="content active" src="GOOGLE_CALENDAR_URL"></iframe>
+    <iframe id="pdf" class="content" src="PDF_URL"></iframe>
+
+    <script>
+        const contents = document.querySelectorAll('.content');
+        let currentIndex = 0;
+        
+        function rotate() {
+            contents[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % contents.length;
+            contents[currentIndex].classList.add('active');
+        }
+        
+        setInterval(rotate, 30000); // Rotates every 30 seconds
+    </script>
 </body>
 </html>
